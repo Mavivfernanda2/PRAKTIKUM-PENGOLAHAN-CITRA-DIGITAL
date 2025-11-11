@@ -1,0 +1,92 @@
+Ujian Tengah Semester
+Mata Kuliah: Pengolahan Citra Digital
+Program Studi: Informatika
+Universitas Nahdlatul Ulama Sidoarjo
+Nama Gambar: durian_montong.jpg
+
+===============================================
+SOAL 1 (CPMK 1 & 2)
+===============================================
+
+Transformasi yang digunakan:
+1. Citra Negatif   → rumus: G = 255 - F
+2. Citra Logaritmik → rumus: G = c * log(1 + F)
+   dengan c = 255 / log(1 + max(F))
+
+Hasil pengamatan:
+- Citra negatif menampilkan pembalikan intensitas warna, sehingga area terang menjadi gelap dan sebaliknya.
+- Citra logaritmik memperjelas area gelap dengan meningkatkan nilai intensitas rendah agar detail muncul.
+- Histogram menunjukkan distribusi nilai piksel berbeda pada tiap transformasi.
+
+Analisa:
+Transformasi negatif baik untuk menonjolkan area terang yang terlalu dominan,
+sedangkan logaritmik lebih cocok untuk citra dengan kontras rendah atau pencahayaan tidak merata (misalnya foto objek gelap).
+
+Kesimpulan:
+Transformasi logaritmik lebih bermanfaat untuk memperjelas detail pada area gelap, sementara transformasi negatif digunakan untuk efek inversi warna.
+
+
+===============================================
+SOAL 2 (CPMK 4)
+===============================================
+
+Jenis Filter dan Tujuan:
+1. Low Pass Filter (LPF) → Menghaluskan citra (reduksi noise / blur)
+2. High Pass Filter (HPF) → Deteksi tepi
+3. Band Pass Filter (BPF) → Penajaman (sharpening)
+
+Analisa hasil visual:
+- LPF menghasilkan gambar yang lebih halus karena rata-rata nilai piksel di sekitar titik pusat.
+- HPF menonjolkan tepi objek, menurunkan nilai di area datar.
+- BPF menggabungkan efek LPF dan HPF untuk mempertajam citra tanpa kehilangan detail penting.
+
+Perbandingan rata-rata nilai piksel:
+Nilai rata-rata menurun pada HPF karena fokus pada perubahan tepi, sedangkan LPF cenderung mempertahankan nilai tengah.
+
+Hubungan Domain:
+- **Domain spasial:** operasi langsung pada piksel citra (menggunakan kernel/filter).
+- **Domain frekuensi:** representasi citra dalam bentuk gelombang (misal FFT).
+Keduanya saling berhubungan karena konvolusi di domain spasial setara dengan perkalian di domain frekuensi.
+
+Kesimpulan:
+LPF, HPF, dan BPF memberikan efek berbeda tergantung tujuan — smoothing, edge detection, atau sharpening.
+
+
+===============================================
+SOAL 3 (CPMK 1, 2, dan 3)
+===============================================
+
+Citra 3x3:
+|100| 90| 80|
+| 60| 50| 40|
+| 30| 20| 10|
+
+Kernel High Pass Filter (HPF):
+|-1| -1| -1|
+|-1|  8| -1|
+|-1| -1| -1|
+
+Hasil konvolusi:
+(100×-1) + (90×-1) + (80×-1) +
+(60×-1) + (50×8) + (40×-1) +
+(30×-1) + (20×-1) + (10×-1)
+= (-100 -90 -80 -60 +400 -40 -30 -20 -10)
+= -30
+
+Nilai akhir (absolute) = 30
+
+Analisa:
+Hasil konvolusi negatif menunjukkan adanya perubahan intensitas tinggi pada pusat citra.
+High Pass Filter memperkuat tepi (edge) dan menurunkan area datar.
+
+Kesimpulan:
+Filter HPF efektif untuk mendeteksi tepi dan meningkatkan detail citra.
+
+
+===============================================
+DAFTAR PUSTAKA
+===============================================
+[1] Gonzalez, R. C., & Woods, R. E. (2018). Digital Image Processing (4th Edition). Pearson.
+[2] Szeliski, R. (2022). Computer Vision: Algorithms and Applications. Springer.
+[3] OpenCV Documentation: https://docs.opencv.org/
+[4] Scikit-Image User Guide: https://scikit-image.org/docs/
